@@ -8,7 +8,7 @@
 </p>
 <p>
   Prezado candidato, este teste foi elaborado em 2 etapas, teórica e pratica.<br/><br/>
-  È permitido consulta a internet, documentação e foruns livremente, pedimos apenas que não faça uso de IA para construção do     código e das respostas teóricas.
+  É permitido consulta a internet, documentação e foruns livremente, pedimos apenas que não faça uso de IA para construção do     código e das respostas teóricas.
 </p>
 <p>
   Este teste tem pontuação máxima de 100 pontos, distribuidos da seguinte forma:
