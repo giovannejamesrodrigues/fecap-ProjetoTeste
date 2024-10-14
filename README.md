@@ -31,6 +31,7 @@
   :arrow_right: Inclua um README.md com instruções claras para configurar e executar o projeto<br/>
   :arrow_right: <b>Prazo de entrega:</b> 7 dias a partir do recebimento do teste
 </p>
+<p><b>:gem: Dica! Não consuma tempo com estilização das paginas do teste pratico, foque na funcionalidade.</b></p>
 
 <h3> 1. Parte Teórica</h3>
 <h4> 1.1 Questões de Múltipla Escolha </h4>
