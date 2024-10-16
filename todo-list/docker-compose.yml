@@ -1,0 +1,11 @@
+services:
+  todo-php:
+    container_name: todo-list-php
+    build:
+      context: sistema-legado-php/
+      dockerfile: Dockerfile
+    ports:
+      - "40000:80"
+    volumes:
+      - ./sistema-legado-php/src/:/var/www/html/
+

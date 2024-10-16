@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !/todo\.php$ [NC]
+RewriteRule .* - [F,L]
