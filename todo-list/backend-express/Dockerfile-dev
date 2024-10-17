@@ -5,7 +5,8 @@ COPY package.json /app
 COPY package-lock.json /app
 COPY src /app/src
 
-RUN npm ci
+RUN npm i
+RUN npm i -g nodemon
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

@@ -8,4 +8,13 @@ services:
       - "40000:80"
     volumes:
       - ./sistema-legado-php/src/:/var/www/html/
+  todo-express:
+    container_name: todo-list-express
+    build:
+      context: backend-express/
+      dockerfile: Dockerfile
+    ports:
+      - "40001:3000"
+    volumes:
+      - ./backend-express/src/:/app/src/
 
