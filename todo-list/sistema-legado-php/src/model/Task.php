@@ -25,7 +25,7 @@ class Task extends Model {
 
     public function create(string $description): object {
         $stmt = $this->pdo->prepare('INSERT INTO tasks (userId, createdAt, description, done) VALUES (:userId, :createdAt, :description, :done)');
-        $stmt->execute([':userId' => $this->user->id, ':createdAt' => date('Y-m-d H:i:s'), ':description' => $description, ':done' => false]);
+        $stmt->execute([':userId' => $this->user->id, ':createdAt' => date('Y-m-d H:i:s'), ':description' => $description, ':done' => 0]);
 
         $taskId = (int)$this->pdo->lastInsertId();
         return $this->get($taskId);
@@ -47,7 +47,7 @@ class Task extends Model {
 
     public function setComplete(int $taskId): object {
         $stmt = $this->pdo->prepare('UPDATE tasks SET done = :done WHERE id = :id AND userId = :userId');
-        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id, ':done' => true]);
+        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id, ':done' => 1]);
 
         return $this->get($taskId);
     }

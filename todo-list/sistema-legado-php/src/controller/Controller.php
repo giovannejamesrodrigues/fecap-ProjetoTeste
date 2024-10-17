@@ -48,22 +48,20 @@ class Controller {
                             try {
                                 $controllerInstance = new $controller($data);
                                 $output = $controllerInstance->{$reflectionMethod->getName()}($data);
-                                if(isset($output)) {
-                                    if(\is_object($output)) {
-                                        $output = (array)$output;
-                                    }
-                                    if(\is_array($output)) {
-                                        \header('Content-Type: application/json');
-                                        echo \json_encode([
-                                            'status' => 200,
-                                            'data' => $output
-                                        ]);
-                                        return;
-                                    }
-                                    if(\is_string($output)) {
-                                        echo $output;
-                                        return;
-                                    }
+                                if(\is_object($output)) {
+                                    $output = (array)$output;
+                                }
+                                if(\is_array($output) || \is_null($output)) {
+                                    \header('Content-Type: application/json');
+                                    echo \json_encode([
+                                        'status' => 200,
+                                        'data' => $output
+                                    ]);
+                                    return;
+                                }
+                                if(\is_string($output)) {
+                                    echo $output;
+                                    return;
                                 }
                                 return;
                             } catch(\Exceptions\JsonException $e) {
