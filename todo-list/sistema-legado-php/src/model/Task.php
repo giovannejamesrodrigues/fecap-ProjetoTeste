@@ -6,36 +6,50 @@ class Task extends Model {
         CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, userId INTEGER, createdAt DATETIME, description TEXT, done BOOLEAN);
     SQL;
 
-    public function getTasks(object $user): array {
-        $stmt = $this->pdo->prepare('SELECT * FROM tasks WHERE userId = :userId');
-        $stmt->execute([':userId' => $user->id]);
-        return $stmt->fetchAll();
+    private object|null $user = null;
+    public function setUser(object $user): void {
+        $this->user = $user;
     }
 
-    public function getTask(object $user, int $taskId): object {
+    public function list(): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM tasks WHERE userId = :userId');
+        $stmt->execute([':userId' => $this->user->id]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function get(int $taskId): object {
         $stmt = $this->pdo->prepare('SELECT * FROM tasks WHERE id = :id AND userId = :userId');
-        $stmt->execute([':id' => $taskId, ':userId' => $user->id]);
+        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id]);
         return $stmt->fetchObject();
     }
 
-    public function createTask(object $user, string $description): void {
+    public function create(string $description): object {
         $stmt = $this->pdo->prepare('INSERT INTO tasks (userId, createdAt, description, done) VALUES (:userId, :createdAt, :description, :done)');
-        $stmt->execute([':userId' => $user->id, ':createdAt' => date('Y-m-d H:i:s'), ':description' => $description, ':done' => false]);
+        $stmt->execute([':userId' => $this->user->id, ':createdAt' => date('Y-m-d H:i:s'), ':description' => $description, ':done' => false]);
+
+        $taskId = (int)$this->pdo->lastInsertId();
+        return $this->get($taskId);
     }
 
-    public function updateTask(object $user, int $taskId, string $description): void {
+    public function update(int $taskId, string $description): object {
         $stmt = $this->pdo->prepare('UPDATE tasks SET description = :description WHERE id = :id AND userId = :userId');
-        $stmt->execute([':id' => $taskId, ':userId' => $user->id, ':description' => $description]);
+        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id, ':description' => $description]);
+
+        return $this->get($taskId);
     }
 
-    public function deleteTask(object $user, int $taskId): void {
+    public function delete(int $taskId): null {
         $stmt = $this->pdo->prepare('DELETE FROM tasks WHERE id = :id AND userId = :userId');
-        $stmt->execute([':id' => $taskId, ':userId' => $user->id]);
+        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id]);
+
+        return null;
     }
 
-    public function completeTask(object $user, int $taskId): void {
+    public function setComplete(int $taskId): object {
         $stmt = $this->pdo->prepare('UPDATE tasks SET done = :done WHERE id = :id AND userId = :userId');
-        $stmt->execute([':id' => $taskId, ':userId' => $user->id, ':done' => true]);
+        $stmt->execute([':id' => $taskId, ':userId' => $this->user->id, ':done' => true]);
+
+        return $this->get($taskId);
     }
 
 }
