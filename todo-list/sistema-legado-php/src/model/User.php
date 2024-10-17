@@ -47,6 +47,9 @@ class User extends Model {
     }
 
     private function getUserByJwt(string $jwt): object {
+        if(\substr_count($jwt, '.') !== 2) {
+            throw new JsonException('Token inválido. Formato inválido.', 401);
+        }
         $parts = \explode('.', $jwt);
         $payload = \json_decode(\base64_decode($parts[1]));
         if($payload->exp < \time()) {

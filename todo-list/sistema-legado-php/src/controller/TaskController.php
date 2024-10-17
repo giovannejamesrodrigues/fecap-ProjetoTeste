@@ -13,10 +13,10 @@ class TaskController extends Controller {
 
     private object $user;
     protected function middleware() {
-        if(!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        if(!isset($_SERVER['HTTP_JWT_TOKEN'])) {
             throw new JsonException('Token não informado', 403);
         }
-        $this->user = $this->userModel->loginJwt($_SERVER['HTTP_AUTHORIZATION']);
+        $this->user = $this->userModel->loginJwt($_SERVER['HTTP_JWT_TOKEN']);
         $this->taskModel->setUser($this->user);
     }
 
@@ -37,7 +37,7 @@ class TaskController extends Controller {
 
     #[Request('/task/editar', method: 'POST')]
     public function editarTask(array $data): object {
-        return $this->taskModel->update($data['id'], $data['descricao']);
+        return $this->taskModel->update((int)$data['id'], $data['descricao']);
     }
 
     #[Request('/task/concluir', method: 'POST')]
