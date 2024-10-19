@@ -5,7 +5,7 @@ COPY package.json /app
 COPY package-lock.json /app
 COPY src /app/src
 
-RUN npm ci
+RUN npm i
 
 EXPOSE 3000
 CMD ["npm", "start"]

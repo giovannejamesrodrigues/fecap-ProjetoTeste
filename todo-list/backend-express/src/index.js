@@ -2,8 +2,10 @@ const DATA_SERVER_URL = 'http://todo-php/todo.php';
 
 import express from 'express';
 import fetch from 'node-fetch';
+import cors from 'cors'
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const apiRouter = express.Router();
@@ -20,9 +22,16 @@ apiRouter.post('/login', async (req, res) => {
                 senha: req.body.password,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
+
 
         res.json({
             success: true,
@@ -50,13 +59,20 @@ apiRouter.post('/register', async (req, res) => {
                 senha: req.body.password,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
             success: true,
             message: 'Usuário cadastrado com sucesso',
+            token: response.data.token,
         });
     } catch (error) {
         res.status(500).json({
@@ -74,8 +90,14 @@ apiRouter.get('/tasks', async (req, res) => {
                 'jwt-token': req.headers.authorization,
             },
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
@@ -104,8 +126,14 @@ apiRouter.post('/tasks', async (req, res) => {
                 descricao: req.body.description,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
@@ -128,8 +156,14 @@ apiRouter.get('/tasks/:id', async (req, res) => {
                 'jwt-token': req.headers.authorization,
             },
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
@@ -159,8 +193,14 @@ apiRouter.put('/tasks/:id', async (req, res) => {
                 descricao: req.body.description,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
@@ -188,8 +228,14 @@ apiRouter.delete('/tasks/:id', async (req, res) => {
                 id: req.params.id,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
@@ -217,8 +263,14 @@ apiRouter.post('/tasks/:id/complete', async (req, res) => {
                 id: req.params.id,
             }),
         }).then(response => response.json());
-        if(response.status != 200) {
-            throw new Error(response.message);
+        if(response.code != 200) {
+            if(response.code) {
+                res.status(response.code).json({
+                    success: false,
+                    message: response.message,
+                });
+                return;
+            }
         }
 
         res.json({
