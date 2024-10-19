@@ -17,4 +17,15 @@ services:
       - "40001:3000"
     volumes:
       - ./backend-express/src/:/app/src/
+  todo-react:
+    container_name: todo-list-react
+    build:
+      context: frontend-react/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react/src:/app/src
+    environment:
+      - WATCHPACK_POLLING=true
 

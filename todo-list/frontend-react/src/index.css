@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Monoton:wght@200;300;400;500;600;700;800&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  background: #80c0eb;
+}
+.container {
+  width: 400px;
+  background: #282851;
+  padding: 1rem;
+  /* margin: 5rem auto; */
+  margin: 3rem auto;
+  border-radius: 5px;
+}
+.container h1 {
+  text-align: center;
+  font-family: 'Monoton';
+  color: rgb(161, 160, 160);
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  word-spacing: 5px;
+  letter-spacing: 5px;
+  padding: 2.4rem 0;
+}
+
+.inputField {
+  width: 100%;
+  padding: 5px 1rem;
+  background: #3e3e5a;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputField input {
+  background: transparent;
+  padding: 10px;
+  color: rgb(161, 160, 160);
+  font-size: 1rem;
+}
+.inputField input::placeholder {
+  color: rgb(161, 160, 160);
+}
+
+.inputField button {
+  background: #3d79b1;
+  color: #fff;
+  font-size: 2rem;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.inputField button:hover {
+  transform: rotate(90deg);
+}
+
+.submit-button {
+  background: #3d79b1;
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 0.4rem 0.8rem;
+}
+
+.submit-button[disabled] {
+  background-color: hsl(209, 0%, 47%);
+  cursor: not-allowed;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: gray;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+h2 {
+  color: rgb(161, 160, 160);
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* to do list style */
+.toDoList {
+  margin-top: 2rem;
+}
+.toDoList span {
+  color: rgb(161, 160, 160);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.link {
+  color: rgb(161, 160, 160);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toDoList .list-items {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.list-items .items {
+  background: #44446b;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(186, 186, 186);
+  user-select: none;
+  cursor: pointer;
+}
+.list-items .items.edit {
+  color: #44446b;
+  background: rgb(186, 186, 186);
+  user-select: initial;
+  cursor: initial;
+}
+input[type='checkbox'] {
+  padding: 5px;
+  cursor: pointer;
+}
+.items-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.items-text div {
+  color: red;
+  overflow: hidden;
+}
+.notify {
+  text-align: center;
+  color: rgb(161, 160, 160);
+}
+
+.delete-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 27px !important;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  display: block;
+}
+.delete-icon:hover {
+  background: #3d79b1;
+  transition: 0.3s;
+}
+
+.isChecked {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.stats {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: #282851;
+}
+
+.error {
+  color: white;
+  font-size: 12px;
+  margin-top: 5px;
+  background: hsla(0, 100%, 70%, 0.664);
+  padding: 12px 20px;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
