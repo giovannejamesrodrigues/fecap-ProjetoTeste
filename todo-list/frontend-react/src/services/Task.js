@@ -1,19 +1,18 @@
 import axios from "axios";
 
 const baseUrl = 'http://127.0.0.1:40001/api/v1';
-const headers = {
-    headers: {
-        'Authorization': localStorage.getItem('token')
+
+function getOptions() {
+    return {
+        headers: {
+            'Authorization': localStorage.getItem('token')
+        }
     }
-};
+}
 
 async function listTasks() {
     try {
-        const response = await axios.get(`${baseUrl}/tasks`, {
-            headers: {
-                'Authorization': localStorage.getItem('token')
-            }
-        });
+        const response = await axios.get(`${baseUrl}/tasks`, getOptions());
 
         if(!response.data.success) {
             throw new Error(response.data.message);
@@ -32,7 +31,7 @@ async function addTask(description) {
     try {
         const response = await axios.post(`${baseUrl}/tasks`, {
             description
-        }, headers);
+        }, getOptions());
 
         if(!response.data.success) {
             throw new Error(response.data.message);
@@ -49,7 +48,7 @@ async function addTask(description) {
 
 async function deleteTask(id) {
     try {
-        const response = await axios.delete(`${baseUrl}/tasks/${id}`, headers);
+        const response = await axios.delete(`${baseUrl}/tasks/${id}`, getOptions());
 
         if(!response.data.success) {
             throw new Error(response.data.message);
@@ -68,7 +67,7 @@ async function updateTask(id, description) {
     try {
         const response = await axios.put(`${baseUrl}/tasks/${id}`, {
             description
-        }, headers);
+        }, getOptions());
 
         if(!response.data.success) {
             throw new Error(response.data.message);
@@ -85,7 +84,7 @@ async function updateTask(id, description) {
 
 async function completeTask(id) {
     try {
-        const response = await axios.post(`${baseUrl}/tasks/${id}/complete`, {}, headers);
+        const response = await axios.post(`${baseUrl}/tasks/${id}/complete`, {}, getOptions());
 
         if(!response.data.success) {
             throw new Error(response.data.message);
